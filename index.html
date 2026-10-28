@@ -184,11 +184,11 @@ button.btn:disabled { opacity: .35; cursor: not-allowed; }
   const newToday = day => Object.keys(UNLOCK).filter(k => UNLOCK[k] === day).map(k => UNLOCK_NAME[k]);
   function makeOrder(vip) {
     const day = dayNow();
-    // 第 1 天只有標準厚度、金黃炸色；第 2 天加薄的、淺的；第 3 天起全開
+    // 厚度第 1 天就有三種；炸色第 1 天只有金黃，第 2 天加淺金，第 3 天起全開
     const span = (arr) => day <= 1 ? [arr[1]] : day === 2 ? arr.slice(0, 2) : arr;
     const o = {
       no: 0, who: vip ? '美食網紅 小雞排' : pick(CUSTOMERS), vip, rot: (rand() - 0.5) * 0.04, drop: 0,
-      thick: pick(span(THICK)), fry: pick(span(FRY)), powder: opened('麵包粉') ? pick(POWDER) : '地瓜粉',
+      thick: pick(THICK), fry: pick(span(FRY)), powder: opened('麵包粉') ? pick(POWDER) : '地瓜粉',
       salt: pick(SALT), chili: pick(day <= 1 ? CHILI.slice(0, 3) : CHILI),
       plum: opened('plum') && rand() < 0.25, seaweed: opened('seaweed') && rand() < 0.25,
       basil: opened('basil') && rand() < 0.35, cheese: opened('cheese') && rand() < 0.3, cut: opened('cut') && rand() < 0.5
